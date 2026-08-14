@@ -2,14 +2,12 @@
 
 A command-line tool for visualizing read coverage around genes/transcripts from RNA-seq BAM files, using custom GTF annotations. Built for working with recombinant or non-standard genomes where off-the-shelf tools fall short.
 
-## What it does
-
 Given a BAM file and a GTF annotation, this tool generates per-gene coverage profiles anchored at a feature of interest (TSS, TES, CDS start/end). It handles:
 
-- **Custom GTF annotations** — works with non-standard or recombinant genomes where gene names and loci may not match public references
-- **GTF position shifting** — includes a utility to shift genomic coordinates in a GTF file by a fixed offset (useful when your insert is at a different position than the reference)
-- **Flexible anchoring** — anchor profiles at the TSS, TES, CDS start, or CDS end
-- **Strand-aware coverage** — supports unstranded, fr-firststrand, and fr-secondstrand libraries
+- **Custom GTF annotations**: works with non-standard or recombinant genomes where gene names and loci may not match public references
+- **GTF position shifting**: includes a utility to shift genomic coordinates in a GTF file by a fixed offset (useful when your insert is at a different position than the reference)
+- **Flexible anchoring**: anchor profiles at the TSS, TES, CDS start, or CDS end
+- **Strand-aware coverage**: supports unstranded, fr-firststrand, and fr-secondstrand libraries
 - **RPM normalization** and optional log transforms (log2, log10, ln)
 - **Binning** for smoothing noisy coverage signals
 - **Per-gene plots and TSVs** for downstream analysis or publication figures
@@ -82,5 +80,5 @@ shift_gtf_positions(
 
 - BAM files must be sorted and indexed (`.bai` file required)
 - The tool handles edge cases like features near contig boundaries by clamping the window
-- If gene IDs aren't found, check your `--attrs` flag — custom GTFs may use non-standard attribute keys (e.g., `RecombinantID`, `locus_tag`)
+- If gene IDs aren't found, check your `--attrs` flag. Custom GTFs may use non-standard attribute keys (e.g., `RecombinantID`, `locus_tag`)
 - For CDS features, the tool collapses all CDS entries per gene into one span
