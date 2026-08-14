@@ -1,6 +1,6 @@
 # Transcript Profile Viewer
 
-A command-line tool for visualizing read coverage around genes/transcripts from RNA-seq BAM files.
+A script for visualizing read coverage around genes/transcripts from RNA-seq BAM files.
 
 Given a BAM file and a GTF annotation, this tool generates per-gene coverage profiles anchored at a feature of interest (TSS, TES, CDS start/end). It handles:
 
