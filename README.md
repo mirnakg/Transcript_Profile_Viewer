@@ -1,11 +1,10 @@
 # Transcript Profile Viewer
 
-A command-line tool for visualizing read coverage around genes/transcripts from RNA-seq BAM files, using custom GTF annotations. Built for working with recombinant or non-standard genomes where off-the-shelf tools fall short.
+A command-line tool for visualizing read coverage around genes/transcripts from RNA-seq BAM files.
 
 Given a BAM file and a GTF annotation, this tool generates per-gene coverage profiles anchored at a feature of interest (TSS, TES, CDS start/end). It handles:
 
-- **Custom GTF annotations**: works with non-standard or recombinant genomes where gene names and loci may not match public references
-- **GTF position shifting**: includes a utility to shift genomic coordinates in a GTF file by a fixed offset (useful when your insert is at a different position than the reference)
+- **GTF position shifting**: includes a utility to shift genomic coordinates in a GTF file by a fixed offset
 - **Flexible anchoring**: anchor profiles at the TSS, TES, CDS start, or CDS end
 - **Strand-aware coverage**: supports unstranded, fr-firststrand, and fr-secondstrand libraries
 - **RPM normalization** and optional log transforms (log2, log10, ln)
@@ -41,7 +40,7 @@ You can also pass a file of gene IDs (one per line) with `--genes-file`.
 
 ### GTF position shifting
 
-If your recombinant insert sits at a different genomic position than the reference GTF, you can shift coordinates:
+If you need to shift genomic coordinates in a GTF file by a fixed offset:
 
 ```python
 from tss_cov_custom import shift_gtf_positions
@@ -59,7 +58,7 @@ shift_gtf_positions(
 | Argument | Description |
 |----------|-------------|
 | `--bam` | Input BAM file (must be indexed) |
-| `--gtf` | Custom GTF annotation |
+| `--gtf` | GTF annotation |
 | `--genes` | Gene IDs/names to profile |
 | `--feature` | Anchor feature: `gene`, `transcript`, or `CDS` |
 | `--anchor` | Anchor point: `tss`, `tes`, `cds_start`, `cds_end` |
@@ -80,5 +79,4 @@ shift_gtf_positions(
 
 - BAM files must be sorted and indexed (`.bai` file required)
 - The tool handles edge cases like features near contig boundaries by clamping the window
-- If gene IDs aren't found, check your `--attrs` flag. Custom GTFs may use non-standard attribute keys (e.g., `RecombinantID`, `locus_tag`)
 - For CDS features, the tool collapses all CDS entries per gene into one span
